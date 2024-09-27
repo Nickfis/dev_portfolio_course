@@ -1,0 +1,145 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: 0;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-weight: 400;
+}
+
+body {
+  font-family: "Inter Tight", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+/* Global Typography Styles */
+
+h1 {
+  font-size: 80px;
+  line-height: 1.1; /* Adjust as needed for spacing */
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 60px;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 40px;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+p,
+li {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* UTILITY CLASSES */
+.dark-grey {
+  color: #5e5e5e;
+}
+
+.default-margin {
+  margin-left: 15vw;
+  margin-right: 20vw;
+  max-width: 950px;
+}
+
+.underscore {
+  background-color: #5e5e5e;
+  height: 4px;
+  width: 40px;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.m-xs {
+  margin-top: 8px;
+}
+
+.mt-s {
+  margin-top: 16px;
+}
+
+.mt-m {
+  margin-top: 32px;
+}
+
+.mt-l {
+  margin-top: 64px;
+}
+
+.mb-xs {
+  margin-bottom: 8px;
+}
+
+.mb-s {
+  margin-bottom: 16px;
+}
+
+.mb-m {
+  margin-bottom: 32px;
+}
+
+.mb-l {
+  margin-bottom: 64px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.semi-bold {
+  font-weight: 500;
+}
