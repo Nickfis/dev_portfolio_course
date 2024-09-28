@@ -11,7 +11,7 @@
   <h3>Hello! I'm Nik</h3>
   <div class="underscore mb-m"></div>
   <h1>I'm a Svelte developer crafting intuitive and performant</h1>
-  <h1 class="dark-grey">web experiences.</h1>
+  <h1 class="dark-grey mb-m">web experiences.</h1>
   <Button {onclick}>Let's talk</Button>
 </section>
 
