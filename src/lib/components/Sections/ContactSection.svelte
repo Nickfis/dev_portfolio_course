@@ -1,23 +1,37 @@
 <script lang="ts">
   import { Button, SectionHeadline } from "$components";
 
-  let contactName = $state("");
-  let contactMail = $state("");
-  let informationAboutProject = $state("");
+  let contactName = $state("Niklas");
+  let contactMail = $state("niklas@kizo-agency.com");
+  let informationAboutProject = $state("Great project");
   let isFormInvalid = $state(false);
+  let isEmailSent = $state(false);
+  let showErrorMessage = $state(false);
+  let isLoading = $state(false);
 
-  $inspect(isFormInvalid);
-
-  function onSubmit(event: Event) {
+  async function onSubmit(event: Event) {
     event.preventDefault();
 
     if (contactMail && contactName && informationAboutProject) {
-      // send data to project
+      isLoading = true;
+      const response = await fetch("/api/send-mail", {
+        method: "POST",
+        body: JSON.stringify({
+          contactName,
+          contactMail,
+          informationAboutProject,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      isLoading = false;
+      if (response.ok) {
+        isEmailSent = true;
+      } else {
+        showErrorMessage = true;
+      }
     } else {
       isFormInvalid = true;
     }
-
-    console.log({ contactMail, contactName, informationAboutProject });
   }
 
   $effect(() => {
@@ -30,27 +44,48 @@
 <section class="mt-l">
   <SectionHeadline sectionName="contact-form">Let's talk</SectionHeadline>
   <div class="form-container default-margin mt-m">
-    <form>
-      <input
-        class="text-input mb-m"
-        class:input-error={isFormInvalid && !Boolean(contactName.length)}
-        placeholder="Your Name"
-        bind:value={contactName}
-      />
-      <input
-        class="text-input mb-m"
-        class:input-error={isFormInvalid && !Boolean(contactMail.length)}
-        placeholder="Your Email"
-        bind:value={contactMail}
-      />
-      <textarea
-        placeholder="Tell me what's up."
-        class:input-error={isFormInvalid &&
-          !Boolean(informationAboutProject.length)}
-        bind:value={informationAboutProject}
-      ></textarea>
-      <Button onclick={onSubmit}>Submit</Button>
-    </form>
+    {#if isEmailSent}
+      <div class="spinner-container">
+        <h3>
+          Thank you for getting in contact with me. I'll usually reply within 48
+          hours.
+        </h3>
+      </div>
+    {:else if isLoading}
+      <div class="spinner-container">
+        <div class="spinner"></div>
+        <h3>Sending off the contact form.</h3>
+      </div>
+    {:else if showErrorMessage}
+      <h3>
+        We seem to have trouble with our server at the moment. Please send me an
+        email directly to <a class="link" href="mailto:niklas@kizo-agency.com">
+          niklas@kizo-agency.com
+        </a>
+      </h3>
+    {:else}
+      <form>
+        <input
+          class="text-input mb-m"
+          class:input-error={isFormInvalid && !Boolean(contactName.length)}
+          placeholder="Your Name"
+          bind:value={contactName}
+        />
+        <input
+          class="text-input mb-m"
+          class:input-error={isFormInvalid && !Boolean(contactMail.length)}
+          placeholder="Your Email"
+          bind:value={contactMail}
+        />
+        <textarea
+          placeholder="Tell me what's up."
+          class:input-error={isFormInvalid &&
+            !Boolean(informationAboutProject.length)}
+          bind:value={informationAboutProject}
+        ></textarea>
+        <Button onclick={onSubmit}>Submit</Button>
+      </form>
+    {/if}
     <div class="form-text">
       <h3 class="bold mb-s">Talk to me about your project</h3>
       <p>
