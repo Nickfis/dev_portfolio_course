@@ -1,19 +1,54 @@
 <script lang="ts">
   import { Button, SectionHeadline } from "$components";
 
+  let contactName = $state("");
+  let contactMail = $state("");
+  let informationAboutProject = $state("");
+  let isFormInvalid = $state(false);
+
+  $inspect(isFormInvalid);
+
   function onSubmit(event: Event) {
     event.preventDefault();
-    console.log(event);
+
+    if (contactMail && contactName && informationAboutProject) {
+      // send data to project
+    } else {
+      isFormInvalid = true;
+    }
+
+    console.log({ contactMail, contactName, informationAboutProject });
   }
+
+  $effect(() => {
+    if (contactName || contactMail || informationAboutProject) {
+      isFormInvalid = false;
+    }
+  });
 </script>
 
 <section class="mt-l">
   <SectionHeadline sectionName="contact-form">Let's talk</SectionHeadline>
   <div class="form-container default-margin mt-m">
     <form>
-      <input class="text-input mb-m" placeholder="Your Name" />
-      <input class="text-input mb-m" placeholder="Your Email" />
-      <textarea placeholder="Tell me what's up."></textarea>
+      <input
+        class="text-input mb-m"
+        class:input-error={isFormInvalid && !Boolean(contactName.length)}
+        placeholder="Your Name"
+        bind:value={contactName}
+      />
+      <input
+        class="text-input mb-m"
+        class:input-error={isFormInvalid && !Boolean(contactMail.length)}
+        placeholder="Your Email"
+        bind:value={contactMail}
+      />
+      <textarea
+        placeholder="Tell me what's up."
+        class:input-error={isFormInvalid &&
+          !Boolean(informationAboutProject.length)}
+        bind:value={informationAboutProject}
+      ></textarea>
       <Button onclick={onSubmit}>Submit</Button>
     </form>
     <div class="form-text">
