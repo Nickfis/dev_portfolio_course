@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Header } from "$components";
+  import { Footer, Header } from "$components";
   import "../app.css";
 
   let { children } = $props();
@@ -7,3 +7,4 @@
 
 <Header />
 {@render children()}
+<Footer />
