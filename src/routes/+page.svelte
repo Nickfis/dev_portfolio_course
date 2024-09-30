@@ -2,6 +2,7 @@
   import {
     AboutMeSection,
     ContactSection,
+    Header,
     HeroSection,
     MyWorkSection,
     SkillsSection,
