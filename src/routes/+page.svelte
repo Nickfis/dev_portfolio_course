@@ -1,6 +1,7 @@
 <script>
   import {
     AboutMeSection,
+    ContactSection,
     HeroSection,
     MyWorkSection,
     SkillsSection,
@@ -14,3 +15,4 @@
 <AboutMeSection {workExperience} />
 <MyWorkSection {projects} />
 <SkillsSection {skills} />
+<ContactSection />
